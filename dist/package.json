@@ -1,0 +1,8 @@
+{
+  "name": "@unlimint/client-js-sdk",
+  "version": "3.0.0-next.0",
+  "public": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
