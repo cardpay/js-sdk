@@ -30,6 +30,9 @@ export type Customer = {
     phone?: string;
     homePhone?: string;
     workPhone?: string;
+    device?: {
+        fingerprint?: string;
+    };
 };
 export type ShippingAddress = {
     country: string;

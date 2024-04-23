@@ -1,8 +1,5 @@
 import { BillingAddress, Customer, MerchantOrder, PaymentData, ReturnUrls, Settings, ShippingAddress } from './common.data';
 type PayFormCustomer = Omit<Customer, 'phone'> & {
-    device?: {
-        fingerprint?: string;
-    };
     locale?: string;
 };
 export type PayFormData = {
