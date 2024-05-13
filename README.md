@@ -288,7 +288,7 @@ PayBySavedCardForm widget contains a form for payment by saved card. Form allows
         },
         enableRedirect: false,
         data: {
-          token: 'e51745bb-1865-5ceb-f20c-ade2c7a4f70e',
+          token: '914389fb-6050-0755-b9bf-a9ad2a730eab',
           lastDigits: '0002',
           merchantName: 'Merchant Name',
           merchantOrder: {
@@ -427,6 +427,8 @@ PayForm widget accepts the following parameters:
 | settings          |                   |             |         |             |             | No           | Settings parameters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |                   | cardholder        |             |         |             |             | No           | Defines the cardholder name input field element on the form.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 |                   |                   | required    | Boolean |             |             | No           | Supported values:<br />• true - customer must enter a valid cardholder name<br />• false - cardholder name is an optional field                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|                   | cpf               |             |         |             |             | No           | Defines the cpf input field element on the form.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+|                   |                   | enabled     | Boolean |             |             | No           | Supported values:<br />• true - customer must enter a valid cpf<br />• false - cpf is not displayed in the form                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 ### PayBySavedCard data
 
@@ -594,67 +596,71 @@ props: {
 
 #### Elements reference
 
-| Component          | Element   | State   | Description                                                                    |
-| ------------------ | --------- | ------- | ------------------------------------------------------------------------------ |
-| textInput          |           |         | Text field input component                                                     |
-|                    | container |         | Container-element for the rest of elements                                     |
-|                    | control   |         | Defines input-field border and inner elements layout                           |
-|                    |           | focused | Focused field                                                                  |
-|                    |           | invalid | Input value is invalid                                                         |
-|                    | rightSlot |         | Right-sided block element that displays additional data, i.e. card brand icon  |
-|                    | label     |         | Text field input label                                                         |
-|                    |           | focused | Focused field                                                                  |
-|                    |           | invalid | Input value is invalid                                                         |
-|                    | input     |         | HTML input element                                                             |
-|                    |           | focused | Focused field                                                                  |
-|                    |           | invalid | Input value is invalid                                                         |
-|                    | error     |         | Input error message                                                            |
-| checkbox           |           |         | Checkbox component                                                             |
-|                    | container |         | Container-element for the rest of elements                                     |
-|                    | label     |         | Text input-field label                                                         |
-| button             |           |         | Button component                                                               |
-|                    | container |         | Container-element for button                                                   |
-| loader             |           |         | Loader-component that indicates request sending                                |
-|                    | container |         | Container-element for the rest of elements; overlaps displayed form            |
-|                    | block     |         | Loader and text component; placed in the center of container element           |
-|                    | spinner   |         | Animated loader SVG-icon                                                       |
-|                    | text      |         | Text label                                                                     |
-| footer             |           |         | Footer component                                                               |
-|                    | container |         | Container-element for SVG-icons                                                |
-| cardForm           |           |         | Card form component                                                            |
-|                    | container |         | Container-element for the rest of elements                                     |
-|                    | body      |         | Container-element of the form                                                  |
-|                    | title     |         | Form's title text                                                              |
-|                    | textInput |         | The same as $textInput.container, but for inline-styles it has higher priority |
-|                    | cardInput |         | Card input container style                                                     |
-|                    | dateInput |         | Date input container style                                                     |
-|                    | cvvInput  |         | CVV2/CVC2 code input container style                                           |
-|                    | submit    |         | The same as $button.container, but for inline-styles it has higher priority    |
-|                    | footer    |         | The same as $footer.container, but for inline-styles it has higher priority    |
-| payForm            |           |         | Payment form component                                                         |
-|                    | container |         | Container-element for the rest of elements                                     |
-|                    | body      |         | Container-element for the form                                                 |
-|                    | title     |         | Form's title text                                                              |
-|                    | total     |         | Total amount displayed                                                         |
-|                    | order     |         | Order ID displayed                                                             |
-|                    | textInput |         | The same as $textInput.container, but for inline-styles it has higher priority |
-|                    | cardInput |         | Card input container style                                                     |
-|                    | dateInput |         | Date input container style                                                     |
-|                    | cvvInput  |         | CVV2/CVC2 code input container style                                           |
-|                    | checkbox  |         | The same as $checkbox.container, but for inline-styles it has higher priority  |
-|                    | submit    |         | The same as $button.container, but for inline-styles it has higher priority    |
-|                    | footer    |         | The same as $footer.container, but for inline styles it has higher priority    |
-| payBySavedCardForm |           |         | Payment by saved card form component                                           |
-|                    | container |         | Container-element for the rest of elements                                     |
-|                    | body      |         | Container-element for the form                                                 |
-|                    | title     |         | Form's title text                                                              |
-|                    | total     |         | Total amount displayed                                                         |
-|                    | order     |         | Order ID displayed                                                             |
-|                    | textInput |         | The same as $textInput.container, but for inline-styles it has higher priority |
-|                    | cardInput |         | Card input container style                                                     |
-|                    | cvvInput  |         | CVV2/CVC2 code input container style                                           |
-|                    | submit    |         | The same as $button.container, but for inline-styles it has higher priority    |
-|                    | footer    |         | The same as $footer.container, but for inline styles it has higher priority    |
+| Component          | Element         | State   | Description                                                                    |
+| ------------------ | --------------- | ------- | ------------------------------------------------------------------------------ |
+| textInput          |                 |         | Text field input component                                                     |
+|                    | container       |         | Container-element for the rest of elements                                     |
+|                    | control         |         | Defines input-field border and inner elements layout                           |
+|                    |                 | focused | Focused field                                                                  |
+|                    |                 | invalid | Input value is invalid                                                         |
+|                    | rightSlot       |         | Right-sided block element that displays additional data, i.e. card brand icon  |
+|                    | label           |         | Text field input label                                                         |
+|                    |                 | focused | Focused field                                                                  |
+|                    |                 | invalid | Input value is invalid                                                         |
+|                    | input           |         | HTML input element                                                             |
+|                    |                 | focused | Focused field                                                                  |
+|                    |                 | invalid | Input value is invalid                                                         |
+|                    | error           |         | Input error message                                                            |
+| checkbox           |                 |         | Checkbox component                                                             |
+|                    | container       |         | Container-element for the rest of elements                                     |
+|                    | label           |         | Text input-field label                                                         |
+| button             |                 |         | Button component                                                               |
+|                    | container       |         | Container-element for button                                                   |
+| loader             |                 |         | Loader-component that indicates request sending                                |
+|                    | container       |         | Container-element for the rest of elements; overlaps displayed form            |
+|                    | block           |         | Loader and text component; placed in the center of container element           |
+|                    | spinner         |         | Animated loader SVG-icon                                                       |
+|                    | text            |         | Text label                                                                     |
+| footer             |                 |         | Footer component                                                               |
+|                    | container       |         | Container-element for SVG-icons                                                |
+| cardForm           |                 |         | Card form component                                                            |
+|                    | container       |         | Container-element for the rest of elements                                     |
+|                    | body            |         | Container-element of the form                                                  |
+|                    | title           |         | Form's title text                                                              |
+|                    | textInput       |         | The same as $textInput.container, but for inline-styles it has higher priority |
+|                    | cardInput       |         | Card input container style                                                     |
+|                    | cardholderInput |         | Cardholder input container style                                               |
+|                    | dateInput       |         | Date input container style                                                     |
+|                    | cvvInput        |         | CVV2/CVC2 code input container style                                           |
+|                    | cpfInput        |         | CPF input container style                                                      |
+|                    | submit          |         | The same as $button.container, but for inline-styles it has higher priority    |
+|                    | footer          |         | The same as $footer.container, but for inline-styles it has higher priority    |
+| payForm            |                 |         | Payment form component                                                         |
+|                    | container       |         | Container-element for the rest of elements                                     |
+|                    | body            |         | Container-element for the form                                                 |
+|                    | title           |         | Form's title text                                                              |
+|                    | total           |         | Total amount displayed                                                         |
+|                    | order           |         | Order ID displayed                                                             |
+|                    | textInput       |         | The same as $textInput.container, but for inline-styles it has higher priority |
+|                    | cardInput       |         | Card input container style                                                     |
+|                    | cardholderInput |         | Cardholder input container style                                               |
+|                    | dateInput       |         | Date input container style                                                     |
+|                    | cvvInput        |         | CVV2/CVC2 code input container style                                           |
+|                    | checkbox        |         | The same as $checkbox.container, but for inline-styles it has higher priority  |
+|                    | cpfInput        |         | CPF input container style                                                      |
+|                    | submit          |         | The same as $button.container, but for inline-styles it has higher priority    |
+|                    | footer          |         | The same as $footer.container, but for inline styles it has higher priority    |
+| payBySavedCardForm |                 |         | Payment by saved card form component                                           |
+|                    | container       |         | Container-element for the rest of elements                                     |
+|                    | body            |         | Container-element for the form                                                 |
+|                    | title           |         | Form's title text                                                              |
+|                    | total           |         | Total amount displayed                                                         |
+|                    | order           |         | Order ID displayed                                                             |
+|                    | textInput       |         | The same as $textInput.container, but for inline-styles it has higher priority |
+|                    | cardInput       |         | Card input container style                                                     |
+|                    | cvvInput        |         | CVV2/CVC2 code input container style                                           |
+|                    | submit          |         | The same as $button.container, but for inline-styles it has higher priority    |
+|                    | footer          |         | The same as $footer.container, but for inline styles it has higher priority    |
 
 ### Texts
 
@@ -678,6 +684,7 @@ props: {
 | ----------------- | ----------------------------------- |
 | title             | Form's title text                   |
 | card-number.label | Card number input-field description |
+| cardholder.label  | Cardholder input-field description  |
 | expiry-date.label | Expiry date input-field description |
 | cvv2-cvc2.label   | CVV2/CVC2 input-field description   |
 | submit            | Submit-control label                |
@@ -689,8 +696,10 @@ props: {
 | total             | Label-text before total amount.          |
 | order             | Order value label                        |
 | card-number.label | Card number input-field description      |
+| cardholder.label  | Cardholder input-field description       |
 | expiry-date.label | Expiry date input-field description      |
 | cvv2-cvc2.label   | CVV2/CVC2 input-field description        |
+| cpf.label         | CPF input-field description              |
 | save-card.label   | Card binding option checkbox description |
 | submit            | Submit-control label                     |
 
