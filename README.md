@@ -21,6 +21,9 @@ Kit contains a pre-made customizable UI featuring bank cards binding and payment
     - [CardForm elements](#cardform-elements)
     - [PayForm elements](#payform-elements)
     - [PayBySavedCardForm elements](#paybysavedcardform-elements)
+  - [Post message](#post-message)
+    - [Form submit](#form-submit)
+    - [Post Messages from JS SDK](#post-messages-from-js-sdk)
 
 ## Getting started
 
@@ -288,7 +291,7 @@ PayBySavedCardForm widget contains a form for payment by saved card. Form allows
         },
         enableRedirect: false,
         data: {
-          token: '914389fb-6050-0755-b9bf-a9ad2a730eab',
+          token: 'e84eca49-6f84-47aa-8e5c-2f6dc6af7151',
           lastDigits: '0002',
           merchantName: 'Merchant Name',
           merchantOrder: {
@@ -353,6 +356,8 @@ CardForm widget accepts the following parameters:
 |                       | **city**      |             | String  |             | 50          | Yes          | Billing city. May include whitespaces, hyphens, apostrophes, commas and dots.                                                                                                                                                                                                                                                                                                                                                                |
 |                       | **addrLine1** |             | String  |             | 50          | Yes          | First line of the street address or equivalent local portion of the Cardholder billing address associated with the card used for this purchase.<br>May include whitespaces, hyphens, apostrophes, commas, quotes, dots, slashes and semicolons.<br>Required (if available) unless market or regional mandate restricts sending this information.                                                                                             |
 |                       | addrLine2     |             | String  |             | 50          | No           | Second line of the street address or equivalent local portion of the Cardholder billing address associated with the card used for this purchase. Required (if available) unless market or regional mandate restricts sending this information.                                                                                                                                                                                               |
+| **cardAccount**       |               |             |         |             |             | No           | Card account data.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|                       | recipientInfo |             | String  |             | 500         | No           | Recipient full name. May include whitespaces, hyphens and apostrophes. Mandatory for money transfer operation.                                                                                                                                                                                                                                                                                                                               |
 | **customer**          |               |             |         |             |             | Yes          | Customer data.                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |                       | **email**     |             | String  |             | 256         | Yes          | Customer’s e-mail address.<br>Optional for wallets where setting in PM "May omit customer email" is enabled.                                                                                                                                                                                                                                                                                                                                 |
 |                       | **id**        |             | String  |             | 15          | Yes          | Customer ID is a unique identifier of a cardholder at the Recurring payments service. Each card used by a cardholder within the service is linked to Customer ID and Filing ID.                                                                                                                                                                                                                                                              |
@@ -363,6 +368,13 @@ CardForm widget accepts the following parameters:
 |                       | phone         |             | String  | 8           | 18          | No           | Customer’s phone number.<br>Recommended to send phone number in following format "+1 111111111" with country code and subscriber sections (only digits are accepted) of the number, "+" as prefix and "space" as delimiter.<br>Refer to ITU-E.164 for additional information on format and length.<br>Mandatory for wallets where setting in PM "May omit customer email" is enabled and customer.email isn't presented in request.          |
 |                       | homePhone     |             | String  | 8           | 18          | No           | The home phone number provided by the Cardholder. Required (if available) unless market or regional mandate restricts sending this information.<br>Characters format: recommended to send phone number in following format "+1 111111111" with country code and subscriber sections (only digits are accepted) of the number, "+" as prefix and "space" as delimiter.<br>Refer to ITU-E.164 for additional information on format and length. |
 |                       | workPhone     |             | String  | 8           | 18          | No           | The work phone number provided by the Cardholder. Required (if available) unless market or regional mandate restricts sending this information.<br>Characters format: recommended to send phone number in following format "+1 111111111" with country code and subscriber sections (only digits are accepted) of the number, "+" as prefix and "space" as delimiter.<br>Refer to ITU-E.164 for additional information on format and length. |
+|                       | fullName      |             | String  | 1           | 255         | No           | Customer full name. May include whitespaces, hyphens and apostrophes. Mandatory for money transfer operation.                                                                                                                                                                                                                                                                                                                                |
+|                       | livingAddress |             |         |             |             | No           | Living address. Mandatory for money transfer operation.                                                                                                                                                                                                                                                                                                                                                                                      |
+|                       |               | country     | String  | 2           | 3           | Yes          | ISO 3166-1 code of living country: 2 or 3 latin letters or numeric code.                                                                                                                                                                                                                                                                                                                                                                     |
+|                       |               | state       | String  |             | 20          | No           | The state or province of the living address. It's recommended to sent in following format: The country subdivision code defined in ISO 3166-1. Mandatory for the US and Canada.                                                                                                                                                                                                                                                              |
+|                       |               | city        | String  |             | 20          | Yes          | Living city. May include whitespaces, hyphens, apostrophes, commas and dots.                                                                                                                                                                                                                                                                                                                                                                 |
+|                       |               | address     | String  |             | 100         | Yes          | Living home address. May include whitespaces, hyphens, apostrophes, commas, quotes, dots, slashes and semicolons.                                                                                                                                                                                                                                                                                                                            |
+|                       | birthDate     |             | String  |             | 10          | No           | Customer date of birth in the YYYY-MM-DD format. The value cannot be a future date.                                                                                                                                                                                                                                                                                                                                                          |
 | returnUrls            |               |             |         |             |             | No           | Return URLs are the URLs where customer returns by pressing “Back to the shop” or “Cancel” button in Payment Page mode and redirected automatically in Gateway mode.                                                                                                                                                                                                                                                                         |
 |                       | returnUrl     |             | String  |             | 512         | No           | Overrides default success URL, decline URL, cancel URL (only in Payment page mode), inprocess URL.<br>return URL can be used separately or together with other url parameters.                                                                                                                                                                                                                                                               |
 |                       | successUrl    |             | String  |             | 512         | No           | Overrides default success URL only.                                                                                                                                                                                                                                                                                                                                                                                                          |
@@ -372,6 +384,8 @@ CardForm widget accepts the following parameters:
 | settings              |               |             |         |             |             | No           | Settings parameters.                                                                                                                                                                                                                                                                                                                                                                                                                         |
 |                       | cardholder    |             |         |             |             | No           | Defines the cardholder name input field element on the form.                                                                                                                                                                                                                                                                                                                                                                                 |
 |                       |               | required    | Boolean |             |             | No           | Supported values:<br>• true - customer must enter a valid cardholder name<br>• false - cardholder name is an optional field                                                                                                                                                                                                                                                                                                                  |
+|                       | livingAddress |             |         |             |             | No           | Defines the block with living address input fields on the form.                                                                                                                                                                                                                                                                                                                                                                              |
+|                       |               | enabled     | Boolean |             |             | No           | Supported values:<br>• true - living address fields are displayed in the form<br>• false - living address fields are not displayed in the form field                                                                                                                                                                                                                                                                                         |
 
 ### PayForm data
 
@@ -417,17 +431,25 @@ PayForm widget accepts the following parameters:
 |                   | **city**          |             | String          |             | 50          | Yes          | Billing city. May include whitespaces, hyphens, apostrophes, commas and dots.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 |                   | **addrLine1**     |             | String          |             | 50          | Yes          | First line of the street address or equivalent local portion of the Cardholder billing address associated with the card used for this purchase.<br />May include whitespaces, hyphens, apostrophes, commas, quotes, dots, slashes and semicolons.<br />Required (if available) unless market or regional mandate restricts sending this information.<br />1-PA: Required unless market or regional mandate restricts sending this information.<br />02-NPA: Required (if available) unless market or regional mandate restricts sending this information.            |
 |                   | addrLine2         |             | String          |             | 50          | No           | Second line of the street address or equivalent local portion of the Cardholder billing address associated with the card used for this purchase. Required (if available) unless market or regional mandate restricts sending this information.                                                                                                                                                                                                                                                                                                                       |
+| **cardAccount**   |                   |             |                 |             |             | No           | Card account data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|                   | recipientInfo     |             | String          |             | 500         | No           | Recipient full name. May include whitespaces, hyphens and apostrophes. Mandatory for money transfer operation.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **customer**      |                   |             |                 |             |             | Yes          | Customer data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |                   | **email**         |             | String          |             | 256         | Yes          | Email address of the customer.<br />Field is Optional for wallets where setting in PM "May omit customer email" is enabled.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 |                   | id                |             | String          |             | 256         | No           | Customer ID is a unique identifier of a cardholder at the Recurring payments service. Each card used by a cardholder within the service is linked to Customer ID and Filing ID.                                                                                                                                                                                                                                                                                                                                                                                      |
 |                   | fullName          |             | String          | 1           | 255         | Yes          | Customer full name. May include whitespaces, hyphens and apostrophes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 |                   | phone             |             | String          | 8           | 18          | Yes          | Email address of the customer.<br />Field is Optional for wallets where setting in PM "May omit customer email" is enabled.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-|                   | identity          |             | String          |             | 256         | No           | Customer CPF number. Mandatory for all Brazil payment method.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   | identity          |             | String          |             | 256         | No           | Customer CPF number. Mandatory for all Brazil payment method.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 |                   | device            |             |                 |             |             | No           | Customer's device.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 |                   |                   | fingerprint | String          |             | 256         | No           | The fingerprint of device.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 |                   | locale            |             | String          |             | 2           | No           | Preferred locale for the payment page (ISO 639-1 language code).<br />The default locale (en or other locale if it's set as default in Merchant account) will be applied if the selected locale (received in request) is not supported. Supported locales are: ar, az, bg, cs, de, el, en, es, fr, hu, hy, id, it, ja, ka, ko, ms, nl, pl, pt, ro, ru, sr, sv, th, tr, uk, vi, zh.                                                                                                                                                                                   |
 |                   | homePhone         |             | String          | 8           | 18          | No           | The home phone number provided by the Cardholder. Required (if available) unless market or regional mandate restricts sending this information.<br />Characters format: recommended to send phone number in following format "+1 111111111" with country code and subscriber sections (only digits are accepted) of the number, "+" as prefix and "space" as delimiter.<br />Refer to ITU-E.164 for additional information on format and length.                                                                                                                     |
 |                   | workPhone         |             | String          | 8           | 18          | No           | The work phone number provided by the Cardholder. Required (if available) unless market or regional mandate restricts sending this information.<br />Characters format: recommended to send phone number in following format "+1 111111111" with country code and subscriber sections (only digits are accepted) of the number, "+" as prefix and "space" as delimiter.<br />Refer to ITU-E.164 for additional information on format and length.                                                                                                                     |
+|                   | livingAddress     |             |                 |             |             | No           | Living address. Mandatory for money transfer operation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|                   |                   | country     | String          | 2           | 3           | Yes          | ISO 3166-1 code of living country: 2 or 3 latin letters or numeric code.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|                   |                   | state       | String          |             | 20          | No           | The state or province of the living address. It's recommended to sent in following format: The country subdivision code defined in ISO 3166-1. Mandatory for the US and Canada.                                                                                                                                                                                                                                                                                                                                                                                      |
+|                   |                   | city        | String          |             | 20          | Yes          | Living city. May include whitespaces, hyphens, apostrophes, commas and dots.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|                   |                   | address     | String          |             | 100         | Yes          | Living home address. May include whitespaces, hyphens, apostrophes, commas, quotes, dots, slashes and semicolons.                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|                   | birthDate         |             | String          |             | 10          | No           | Customer date of birth in the YYYY-MM-DD format. The value cannot be a future date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | returnUrls        |                   |             |                 |             |             | No           | Return URLs are the URLs where customer returns by pressing “Back to the shop” or “Cancel” button in Payment Page mode and redirected automatically in Gateway mode.                                                                                                                                                                                                                                                                                                                                                                                                 |
 |                   | returnUrl         |             | String          |             | 512         | No           | Overrides default success URL, decline URL, cancel URL (only in Payment page mode), inprocess URL.<br />Return URL can be used separately or together with other url parameters.                                                                                                                                                                                                                                                                                                                                                                                     |
 |                   | successUrl        |             | String          |             | 512         | No           | Overrides default success URL only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -439,6 +461,8 @@ PayForm widget accepts the following parameters:
 |                   |                   | required    | Boolean         |             |             | No           | Supported values:<br />• true - customer must enter a valid cardholder name<br />• false - cardholder name is an optional field                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |                   | cpf               |             |                 |             |             | No           | Defines the cpf input field element on the form.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 |                   |                   | enabled     | Boolean         |             |             | No           | Supported values:<br />• true - customer must enter a valid cpf<br />• false - cpf is not displayed in the form                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|                   | livingAddress     |             |                 |             |             | No           | Defines the block with living address input fields on the form.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|                   |                   | enabled     | Boolean         |             |             | No           | Supported values:<br>• true - living address fields are displayed in the form<br>• false - living address fields are not displayed in the form field                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ### PayBySavedCard data
 
@@ -479,6 +503,8 @@ PayBySavedCard widget accepts the following parameters:
 |                   | **city**          |             | String  |             | 50          | Yes          | Billing city. May include whitespaces, hyphens, apostrophes, commas and dots.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |                   | **addrLine1**     |             | String  |             | 50          | Yes          | First line of the street address or equivalent local portion of the Cardholder billing address associated with the card used for this purchase.<br />May include whitespaces, hyphens, apostrophes, commas, quotes, dots, slashes and semicolons.<br />Required (if available) unless market or regional mandate restricts sending this information.<br />1-PA: Required unless market or regional mandate restricts sending this information.<br />02-NPA: Required (if available) unless market or regional mandate restricts sending this information. |
 |                   | addrLine2         |             | String  |             | 50          | No           | Second line of the street address or equivalent local portion of the Cardholder billing address associated with the card used for this purchase. Required (if available) unless market or regional mandate restricts sending this information.                                                                                                                                                                                                                                                                                                            |
+| **cardAccount**   |                   |             |         |             |             | No           | Card account data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|                   | recipientInfo     |             | String  |             | 500         | No           | Recipient full name. May include whitespaces, hyphens and apostrophes. Mandatory for money transfer operation.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | **customer**      |                   |             |         |             |             | Yes          | Customer data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |                   | **email**         |             | String  |             | 256         | Yes          | Email address of the customer.<br />field is Optional for wallets where setting in PM "May omit customer email" is enabled.                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |                   | device            |             |         |             |             | No           | Customer's device.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -486,12 +512,22 @@ PayBySavedCard widget accepts the following parameters:
 |                   | locale            |             | String  |             | 2           | No           | Preferred locale for the payment page (ISO 639-1 language code).<br />The default locale (en or other locale if it's set as default in Merchant account) will be applied if the selected locale (received in request) is not supported. Supported locales are: ar, az, bg, cs, de, el, en, es, fr, hu, hy, id, it, ja, ka, ko, ms, nl, pl, pt, ro, ru, sr, sv, th, tr, uk, vi, zh.                                                                                                                                                                        |
 |                   | homePhone         |             | String  | 8           | 18          | No           | The home phone number provided by the Cardholder. Required (if available) unless market or regional mandate restricts sending this information.<br />Characters format: recommended to send phone number in following format "+1 111111111" with country code and subscriber sections (only digits are accepted) of the number, "+" as prefix and "space" as delimiter.<br />Refer to ITU-E.164 for additional information on format and length.                                                                                                          |
 |                   | workPhone         |             | String  | 8           | 18          | No           | The work phone number provided by the Cardholder. Required (if available) unless market or regional mandate restricts sending this information.<br />Characters format: recommended to send phone number in following format "+1 111111111" with country code and subscriber sections (only digits are accepted) of the number, "+" as prefix and "space" as delimiter.<br />Refer to ITU-E.164 for additional information on format and length.                                                                                                          |
+|                   | fullName          |             | String  | 1           | 255         | No           | Customer full name. May include whitespaces, hyphens and apostrophes. Mandatory for money transfer operation.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|                   | livingAddress     |             |         |             |             | No           | Living address. Mandatory for money transfer operation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|                   |                   | country     | String  | 2           | 3           | Yes          | ISO 3166-1 code of living country: 2 or 3 latin letters or numeric code.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|                   |                   | state       | String  |             | 20          | No           | The state or province of the living address. It's recommended to sent in following format: The country subdivision code defined in ISO 3166-1. Mandatory for the US and Canada.                                                                                                                                                                                                                                                                                                                                                                           |
+|                   |                   | city        | String  |             | 20          | Yes          | Living city. May include whitespaces, hyphens, apostrophes, commas and dots.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|                   |                   | address     | String  |             | 100         | Yes          | Living home address. May include whitespaces, hyphens, apostrophes, commas, quotes, dots, slashes and semicolons.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|                   | birthDate         |             | String  |             | 10          | No           | Customer date of birth in the YYYY-MM-DD format. The value cannot be a future date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | returnUrls        |                   |             |         |             |             | No           | Return URLs are the URLs where customer returns by pressing “Back to the shop” or “Cancel” button in Payment Page mode and redirected automatically in Gateway mode.                                                                                                                                                                                                                                                                                                                                                                                      |
 |                   | returnUrl         |             | String  |             | 512         | No           | Overrides default success URL, decline URL, cancel URL (only in Payment page mode), inprocess URL.<br />Return URL can be used separately or together with other url parameters.                                                                                                                                                                                                                                                                                                                                                                          |
 |                   | successUrl        |             | String  |             | 512         | No           | Overrides default success URL only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |                   | declineUrl        |             | String  |             | 512         | No           | Overrides default decline URL only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |                   | cancelUrl         |             | String  |             | 512         | No           | Overrides default cancel URL only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 |                   | inprocessUrl      |             | String  |             | 512         | No           | Special URL for In process status of transaction.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| settings          |                   |             |         |             |             | No           | Settings parameters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|                   | livingAddress     |             |         |             |             | No           | Defines the block with living address input fields on the form.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|                   |                   | enabled     | Boolean |             |             | No           | Supported values:<br>• true - living address fields are displayed in the form<br>• false - living address fields are not displayed in the form field                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ## Customization
 
@@ -691,37 +727,214 @@ props: {
 
 #### CardForm elements
 
-| Text              | Description                         |
-| ----------------- | ----------------------------------- |
-| title             | Form's title text                   |
-| card-number.label | Card number input-field description |
-| cardholder.label  | Cardholder input-field description  |
-| expiry-date.label | Expiry date input-field description |
-| cvv2-cvc2.label   | CVV2/CVC2 input-field description   |
-| submit            | Submit-control label                |
+| Text                       | Description                                             |
+| -------------------------- | ------------------------------------------------------- |
+| title                      | Form's title text                                       |
+| card-number.label          | Card number input-field description                     |
+| card-number.placeholder    | Placeholder for card number input-field                 |
+| card-number.required-error | Error text for required card number input-field         |
+| card-number.invalid-error  | Error text for invalid value in card number input-field |
+| cardholder.label           | Cardholder input-field description                      |
+| cardholder.placeholder     | Placeholder for cardholder input-field                  |
+| cardholder.required-error  | Error text for required cardholder input-field          |
+| cardholder.invalid-error   | Error text for invalid value in cardholder input-field  |
+| expiry-date.label          | Expiry date input-field description                     |
+| expiry-date.placeholder    | Placeholder for expiry date input-field                 |
+| expiry-date.required-error | Error text for required expiry date input-field         |
+| expiry-date.invalid-error  | Error text for invalid value in expiry date input-field |
+| cvv2-cvc2.label            | CVV2/CVC2 input-field description                       |
+| cvv2-cvc2.placeholder      | Placeholder for CVV2/CVC2 input-field                   |
+| cvv2-cvc2.required-error   | Error text for required CVV2/CVC2 input-field           |
+| cvv2-cvc2.invalid-error    | Error text for invalid value in CVV2/CVC2 input-field   |
+| submit                     | Submit-control label                                    |
 
 #### PayForm elements
 
-| Text               | Description                              |
-| ------------------ | ---------------------------------------- |
-| total              | Label-text before total amount.          |
-| order              | Order value label                        |
-| card-number.label  | Card number input-field description      |
-| cardholder.label   | Cardholder input-field description       |
-| expiry-date.label  | Expiry date input-field description      |
-| cvv2-cvc2.label    | CVV2/CVC2 input-field description        |
-| cpf.label          | CPF input-field description              |
-| save-card.label    | Card binding option checkbox description |
-| installments.label | Installments tooltip-field description   |
-| save-card.label    | Card binding option checkbox description |
-| submit             | Submit-control label                     |
+| Text                                      | Description                                                |
+| ----------------------------------------- | ---------------------------------------------------------- |
+| total                                     | Label-text before total amount                             |
+| order                                     | Order value label                                          |
+| card-number.label                         | Card number input-field description                        |
+| card-number.placeholder                   | Placeholder for card number input-field                    |
+| card-number.required-error                | Error text for required card number input-field            |
+| card-number.invalid-error                 | Error text for invalid value in card number input-field    |
+| cardholder.label                          | Cardholder input-field description                         |
+| cardholder.placeholder                    | Placeholder for cardholder input-field                     |
+| cardholder.required-error                 | Error text for required cardholder input-field             |
+| cardholder.invalid-error                  | Error text for invalid value in cardholder input-field     |
+| expiry-date.label                         | Expiry date input-field description                        |
+| expiry-date.placeholder                   | Placeholder for expiry date input-field                    |
+| expiry-date.required-error                | Error text for required expiry date input-field            |
+| expiry-date.invalid-error                 | Error text for invalid value in expiry date input-field    |
+| cvv2-cvc2.label                           | CVV2/CVC2 input-field description                          |
+| cvv2-cvc2.placeholder                     | Placeholder for CVV2/CVC2 input-field                      |
+| cvv2-cvc2.required-error                  | Error text for required CVV2/CVC2 input-field              |
+| cvv2-cvc2.invalid-error                   | Error text for invalid value in CVV2/CVC2 input-field      |
+| cpf.label                                 | CPF input-field description                                |
+| cpf.placeholder                           | Placeholder for CPF input-field                            |
+| cpf.required-error                        | Error text for required CPF input-field                    |
+| cpf.invalid-error                         | Error text for invalid value in CPF input-field            |
+| living-country-select.placeholder         | Placeholder for living country select-field                |
+| living-country-select.focused-placeholder | Placeholder for focused living country select-field        |
+| living-country-select.required-error      | Error text for required living country select-field        |
+| living-state.placeholder                  | Placeholder for living state input-field                   |
+| living-state.required-error               | Error text for required living state input-field           |
+| living-state.invalid-error                | Error text for invalid value in living state input-field   |
+| living-city.placeholder                   | Placeholder for living city input-field                    |
+| living-city.required-error                | Error text for required living city input-field            |
+| living-city.invalid-error                 | Error text for invalid value in living city input-field    |
+| living-address.placeholder                | Placeholder for living address input-field                 |
+| living-address.required-error             | Error text for required living address input-field         |
+| living-address.invalid-error              | Error text for invalid value in living address input-field |
+| save-card.label                           | Card binding option checkbox description                   |
+| installments.label                        | Installments tooltip-field description                     |
+| submit                                    | Submit-control label                                       |
 
 #### PayBySavedCardForm elements
 
-| Text                    | Description                                |
-| ----------------------- | ------------------------------------------ |
-| total                   | Label-text before total amount.            |
-| order                   | Order value label                          |
-| saved-card-number.label | Masked 4-last cards's digits element label |
-| cvv2-cvc2.label         | CVV2/CVC2 input-field description          |
-| submit                  | Submit-control label                       |
+| Text                     | Description                                           |
+| ------------------------ | ----------------------------------------------------- |
+| total                    | Label-text before total amount.                       |
+| order                    | Order value label                                     |
+| saved-card-number.label  | Masked 4-last cards's digits element label            |
+| cvv2-cvc2.label          | CVV2/CVC2 input-field description                     |
+| cvv2-cvc2.placeholder    | Placeholder for CVV2/CVC2 input-field                 |
+| cvv2-cvc2.required-error | Error text for required CVV2/CVC2 input-field         |
+| cvv2-cvc2.invalid-error  | Error text for invalid value in CVV2/CVC2 input-field |
+| submit                   | Submit-control label                                  |
+
+### Post message
+
+When integrating the form widget, you have the ability to programmatically submit the form using the postMessage method. This can be particularly useful for applications requiring advanced handling or integration with parent windows.
+
+#### Form submit
+
+To submit the form widget, you can send a message with the following structure:
+
+```js
+// Find iframe element
+const iframe = document.getElementById('js-sdk');
+
+const data = {
+  submit: true,
+};
+
+// Pass config if iframe loaded
+iframe.contentWindow.postMessage(data, '*');
+```
+
+Upon receiving the message containing { submit: true }, the form widget will:
+
+- Validate: the form fields will be validated according to the specified rules (e.g., required fields, proper formats).
+- Submit: if the validation is successful, the form will be submitted automatically.
+
+#### Post Messages from JS SDK
+
+The JS SDK sends Post Messages to the parent window to communicate the status of form processing and results. Your application should listen for these messages to handle different states of the widget.
+
+All Post Messages from JS SDK have the following structure:
+
+```js
+{
+  event: 'EVENT_NAME',
+  origin: 'UNLIMIT_JS_SDK',
+  // Additional data depending on event type
+}
+```
+
+##### PROCESSING_START Event
+
+When any form (CardForm, PayForm, or PayBySavedCardForm) begins processing a submission, it sends this message:
+
+```js
+{
+  event: 'PROCESSING_START',
+  origin: 'UNLIMIT_JS_SDK'
+}
+```
+
+##### PROCESSING_SUCCESS Event
+
+When form processing completes successfully, the JS SDK sends a result message:
+
+```js
+{
+  event: 'PROCESSING_SUCCESS',
+  origin: 'UNLIMIT_JS_SDK',
+  type: 'SUCCESS',
+  data: {
+    // Response data from the payment/cardbinding API
+  }
+}
+```
+
+##### PROCESSING_ERROR Event
+
+When form processing fails or encounters an error, the JS SDK sends an error message:
+
+```js
+{
+  event: 'PROCESSING_ERROR',
+  origin: 'UNLIMIT_JS_SDK',
+  type: 'ERROR',
+  error: {
+    // Error details from the API or processing
+  }
+}
+```
+
+**Usage Example:**
+
+```js
+// Listen for messages from the JS SDK
+window.addEventListener('message', function (event) {
+  // Check if the message is from Unlimit JS SDK
+  if (event.data.origin === 'UNLIMIT_JS_SDK') {
+    switch (event.data.event) {
+      case 'PROCESSING_START':
+        console.log('Form processing started');
+        showLoadingIndicator();
+        break;
+
+      case 'PROCESSING_SUCCESS':
+        console.log('Form processing completed successfully:', event.data.data);
+        hideLoadingIndicator();
+        handleSuccessfulPayment(event.data.data);
+        break;
+
+      case 'PROCESSING_ERROR':
+        console.log('Form processing failed:', event.data.error);
+        hideLoadingIndicator();
+        handlePaymentError(event.data.error);
+        break;
+
+      default:
+        console.log('Unknown event:', event.data.event);
+    }
+  }
+});
+
+function showLoadingIndicator() {
+  document.getElementById('loading').style.display = 'block';
+}
+
+function hideLoadingIndicator() {
+  document.getElementById('loading').style.display = 'none';
+}
+
+function handleSuccessfulPayment(data) {
+  // Handle successful payment
+}
+
+function handlePaymentError(error) {
+  // Handle payment error
+}
+```
+
+**When these messages are sent:**
+
+- **PROCESSING_START**: Sent when any form submission begins processing
+- **PROCESSING_SUCCESS**: Sent when processing completes successfully
+- **PROCESSING_ERROR**: Sent when processing fails or encounters an error
+
+These messages allow your application to respond to all stages of form processing, providing complete control over the user experience and error handling.

@@ -1,11 +1,21 @@
-export type CardFormCustomTexts = {
+export type LivingAddressTexts = {
+    'living-country-select.label'?: string;
+    'living-country-select.placeholder'?: string;
+    'living-state.label'?: string;
+    'living-state.placeholder'?: string;
+    'living-city.label'?: string;
+    'living-city.placeholder'?: string;
+    'living-address.label'?: string;
+    'living-address.placeholder'?: string;
+};
+export type CardFormCustomTexts = LivingAddressTexts & {
     title?: string;
     'card-number.label'?: string;
     'expiry-date.label'?: string;
     'cvv2-cvc2.label'?: string;
     submit?: string;
 };
-export type PayFormCustomTexts = {
+export type PayFormCustomTexts = LivingAddressTexts & {
     total?: string;
     order?: string;
     'card-number.label'?: string;
@@ -14,7 +24,7 @@ export type PayFormCustomTexts = {
     'save-card.label'?: string;
     submit?: string;
 };
-export type PayBySavedCardFormCustomTexts = {
+export type PayBySavedCardFormCustomTexts = LivingAddressTexts & {
     total?: string;
     order?: string;
     'card-number.label'?: string;
