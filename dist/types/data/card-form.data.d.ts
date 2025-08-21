@@ -1,4 +1,4 @@
-import { BillingAddress, Customer, MerchantOrder, PaymentData, ReturnUrls, Settings } from '../data/common.data';
+import { BillingAddress, Customer, MerchantOrder, PaymentData, ReturnUrls } from '../data/common.data';
 type CardFormMerchantOrder = Partial<Pick<MerchantOrder, 'id' | 'description'>>;
 type CardFormCustomer = Customer & {
     id: string;
@@ -12,10 +12,9 @@ type CardFormPaymentData = Pick<PaymentData, 'currency'> & {
 export type CardFormData = {
     merchantOrder?: CardFormMerchantOrder;
     recurringCurrency?: string;
-    billingAddress: BillingAddress;
+    billingAddress?: BillingAddress;
     customer: CardFormCustomer;
     returnUrls?: ReturnUrls;
-    settings?: Settings;
     paymentData?: CardFormPaymentData;
 };
 export {};

@@ -23,7 +23,7 @@ export type WrapperSettings = {
      * The environment in which the js-sdk runs. There are only two options: "sandbox", "production". By default "production"
      * The sandbox environment is designed to emulate the work of the js-sdk and the js-sdk embedding stage
      */
-    environment?: Environment;
+    environment?: `${Environment}`;
     /**
      * A callback function that will be called if a message arrives from an iframe
      *

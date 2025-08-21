@@ -11,7 +11,7 @@ export type PayTokenData = {
     shippingAddress?: ShippingAddress;
     paymentMethod: string;
     paymentData: PayTokenPaymentData;
-    billingAddress: BillingAddress;
+    billingAddress?: BillingAddress;
     customer: PayTokenCustomer;
     returnUrls?: ReturnUrls;
 };

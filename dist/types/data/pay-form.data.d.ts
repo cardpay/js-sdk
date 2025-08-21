@@ -1,4 +1,4 @@
-import { BillingAddress, Customer, MerchantOrder, PaymentData, ReturnUrls, Settings, ShippingAddress } from './common.data';
+import { BillingAddress, Customer, MerchantOrder, PaymentData, ReturnUrls, ShippingAddress } from './common.data';
 type PayFormCustomer = Omit<Customer, 'phone'> & {
     locale?: string;
     id?: string;
@@ -20,9 +20,8 @@ export type PayFormData = {
     shippingAddress?: ShippingAddress;
     paymentMethod: string;
     paymentData: PayFormPaymentData;
-    billingAddress: BillingAddress;
+    billingAddress?: BillingAddress;
     customer: PayFormCustomer;
     returnUrls?: ReturnUrls;
-    settings?: Settings;
 };
 export {};

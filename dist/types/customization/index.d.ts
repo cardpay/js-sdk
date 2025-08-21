@@ -15,6 +15,13 @@ export type CardFormCustomTexts = LivingAddressTexts & {
     'cvv2-cvc2.label'?: string;
     submit?: string;
 };
+export type CardSavingFormCustomTexts = LivingAddressTexts & {
+    title?: string;
+    'card-number.label'?: string;
+    'expiry-date.label'?: string;
+    'cvv2-cvc2.label'?: string;
+    submit?: string;
+};
 export type PayFormCustomTexts = LivingAddressTexts & {
     total?: string;
     order?: string;
@@ -63,6 +70,16 @@ export type BaseFormCustomStyles = Partial<{
 }>;
 export type CardFormCustomStyles = BaseFormCustomStyles & {
     $cardForm: Partial<{
+        container: StyleDeclarations;
+        body: StyleDeclarations;
+        title: StyleDeclarations;
+        textInput: StyleDeclarations;
+        submit: StyleDeclarations;
+        footer: StyleDeclarations;
+    }>;
+};
+export type CardSavingFormCustomStyles = BaseFormCustomStyles & {
+    $cardSavingForm: Partial<{
         container: StyleDeclarations;
         body: StyleDeclarations;
         title: StyleDeclarations;
@@ -125,6 +142,19 @@ export type BaseFormCustomClasses = Partial<{
 }>;
 export type CardFormCustomClasses = BaseFormCustomClasses & {
     $cardForm: Partial<{
+        container: string;
+        body: string;
+        title: string;
+        textInput: string;
+        cardInput: string;
+        dateInput: string;
+        cvvInput: string;
+        submit: string;
+        footer: string;
+    }>;
+};
+export type CardSavingFormCustomClasses = BaseFormCustomClasses & {
+    $cardSavingForm: Partial<{
         container: string;
         body: string;
         title: string;
