@@ -1,6 +1,6 @@
 {
   "name": "@unlimint/client-js-sdk",
-  "version": "3.9.0",
+  "version": "3.9.1",
   "public": true,
   "typings": "main.d.ts",
   "main": "main.js",
